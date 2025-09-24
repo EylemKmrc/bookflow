@@ -1,0 +1,45 @@
+<div class="min-vh-100 d-flex align-items-center justify-content-center bg-light">
+    <div>
+      <!-- Begrüßung -->
+      <div class="text-center mb-4">
+        <h2 class="fw-bold">Willkommen bei BookFlow</h2>
+        <p class="text-muted">
+          Ihre persönliche Bibliothek
+        </p>
+      </div>
+  
+      <!-- Login Karte -->
+      <div class="card shadow-sm" style="max-width:420px; width:100%">
+        <div class="card-body p-4">
+          <h4 class="mb-3 text-center">Login</h4>
+  
+          <!-- Wichtig: KEIN text-center mehr hier -->
+          <form [formGroup]="form" (ngSubmit)="submit()" class="vstack gap-3">
+            <div>
+              <label class="form-label" for="username">Benutzername</label>
+              <input id="username" type="text" class="form-control" formControlName="username">
+            </div>
+  
+            <div>
+              <label class="form-label" for="password">Passwort</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                <input id="password" type="password" class="form-control" formControlName="password">
+              </div>
+            </div>
+  
+            <button class="btn btn-primary w-100" [disabled]="form.invalid || loading">
+              <span *ngIf="!loading"><i class="bi bi-box-arrow-in-right me-1"></i> Einloggen</span>
+              <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
+            </button>
+          </form>
+  
+          <div class="text-center mt-3">
+            <a routerLink="/register" class="link-secondary small">Noch kein Account? Registrieren</a>
+          </div>
+  
+          <div *ngIf="error" class="alert alert-danger mt-3 py-2">{{ error }}</div>
+        </div>
+      </div>
+    </div>
+  </div>

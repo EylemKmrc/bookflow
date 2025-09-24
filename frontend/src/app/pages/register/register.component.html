@@ -1,0 +1,37 @@
+<div class="min-vh-100 d-flex align-items-center justify-content-center bg-light">
+    <div class="card shadow-sm" style="max-width:420px; width:100%">
+      <div class="card-body p-4">
+        <h4 class="mb-3 text-center">Registrieren</h4>
+  
+        <form [formGroup]="form" (ngSubmit)="submit()" class="vstack gap-3">
+          <div>
+            <label class="form-label" for="username">Benutzername</label>
+            <input id="username" class="form-control" formControlName="username">
+          </div>
+  
+          <div>
+            <label class="form-label" for="password">Passwort</label>
+            <input id="password" type="password" class="form-control" formControlName="password">
+          </div>
+  
+          <div>
+            <label class="form-label" for="password2">Passwort (wiederholen)</label>
+            <input id="password2" type="password" class="form-control" formControlName="confirmPassword">
+            <div class="form-text text-danger" *ngIf="form.hasError('passwordMismatch')">
+              Bitte selbes Passwort eingeben
+            </div>
+          </div>
+  
+          <button class="btn btn-success w-100" [disabled]="form.invalid || loading">
+            <i class="bi bi-person-plus me-1"></i> Registrieren
+          </button>
+        </form>
+  
+        <div class="text-center mt-3">
+          <a routerLink="/login" class="link-secondary small">Schon Account? Zum Login</a>
+        </div>
+  
+        <div *ngIf="error" class="alert alert-danger mt-3 py-2">{{ error }}</div>
+      </div>
+    </div>
+  </div>

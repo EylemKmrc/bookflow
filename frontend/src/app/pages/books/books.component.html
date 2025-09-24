@@ -1,0 +1,50 @@
+<nav class="navbar bg-white border-bottom sticky-top">
+    <div class="container">
+      <span class="navbar-brand mb-0 h4">Meine Bücher</span>
+      <button class="btn btn-outline-secondary btn-sm" (click)="logout()">
+        <i class="bi bi-box-arrow-right"></i> Logout
+      </button>
+    </div>
+  </nav>
+  
+  <div class="container my-4">
+    <!-- Leerzustand -->
+    <div *ngIf="books().length === 0; else listTpl" class="text-center py-5">
+      <p class="lead mb-3">Es sind noch keine Bücher eingetragen.</p>
+      <button class="btn btn-primary" (click)="goToNew()">
+        <i class="bi bi-plus-circle"></i> Bücher eintragen
+      </button>
+    </div>
+  
+    <!-- Liste -->
+    <ng-template #listTpl>
+      <div class="d-flex justify-content-end mb-3">
+        <button class="btn btn-primary" (click)="goToNew()">
+          <i class="bi bi-plus-circle"></i> Buch hinzufügen
+        </button>
+      </div>
+  
+      <div class="list-group shadow-sm">
+        <div class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let b of books()">
+          <div class="me-3">
+            <div class="fw-bold">{{ b.titel }}</div>
+            <div class="text-muted small">{{ (b.autoren || []).join(', ') }}</div>
+            <div class="text-muted small">{{ b.status }}</div>
+            <div class="text-muted small" *ngIf="b.notizen">{{ b.notizen }}</div>
+          </div>
+  
+          <div class="btn-group btn-group-sm">
+            
+            <!-- Bearbeiten führt zur Edit-Seite -->
+            <button class="btn btn-outline-secondary" (click)="edit(b)">
+              bearbeiten
+            </button>
+  
+            <button class="btn btn-outline-danger" (click)="del(b)">
+              löschen
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
